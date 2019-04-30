@@ -1,27 +1,28 @@
 \section{MARCO TEORICO} 
-\begin {itemize}
+
+\par 
+
+\subsection{API REST}
+	\par Ha pasado más de una década desde que Roy Fielding, un científico informático estadounidense y uno de los autores principales de la especificación HTTP, introdujo Representational State Transfer (REST) como un estilo de arquitectura. A lo largo de los años, REST ha ganado impulso gracias a su popularidad para la creación de servicios web.\\
+Al no tener estado, y al crear identificadores únicos para permitir el almacenamiento en caché, la creación de capas y la capacidad de lectura, las API REST hacen uso de los verbos HTTP existentes (GET, POST, PUT y DELETE) para crear, actualizar y eliminar nuevos recursos. El término REST se usa con frecuencia para describir cualquier URL que devuelva JSON en lugar de HTML.[3]
 \subsection{Entity Framework}
-	\item Entity Framework (EF) es un mapeador relacional de objetos (O/RM) probado y probado para .NET con muchos años de desarrollo y estabilización de características.\\
-Es la tecnología de acceso a datos recomendada por Microsoft para nuevas aplicaciones.\\	
-	\item Como O/RM, EF reduce la discrepancia de impedancia entre los mundos relacionales y orientados a objetos, permitiendo a los desarrolladores escribir aplicaciones que interactúan con datos almacenados en bases de datos relacionales utilizando objetos .NET de tipo fuerte que representan el dominio de la aplicación y eliminando la necesidad para una gran parte del código de "plumbing" de acceso a datos que normalmente necesitan escribir.\\
-	\item EF implementa muchas características populares de O/RM:\\
-	- Mapeo de clases de entidad POCO que no dependen de ningún tipo de EF\\
-	- Seguimiento automático de cambios\\
-	- Resolución de identidad y Unidad de Trabajo.\\
-	- Carga ansiosa, perezosa y explícita.\\
-	- Traducción de consultas fuertemente tipadas utilizando LINQ \\
-	- Capacidades de mapeo enriquecidas, incluyendo soporte para:\\
-	\subitem - Relaciones uno a uno, uno a muchos y muchos a muchos\\
-	\subitem - Herencia (tabla por jerarquía, tabla por tipo y tabla por clase concreta)\\
-	\subitem - Tipos complejos\\
-	\subitem - Procedimientos almacenados\\
-	\newline
-	- Un diseñador visual para crear modelos de entidad.\\
-	- Una experiencia de "Código Primero" para crear modelos de entidad al escribir código.\\
-	- Los modelos pueden generarse a partir de bases de datos existentes y luego editarse manualmente, o pueden crearse desde cero y luego usarse para generar nuevas bases de datos.\\
-	- Integración con modelos de aplicaciones de .NET Framework, incluido ASP.NET, y mediante enlace de datos, con WPF y WinForms.\\
-	- Conectividad de base de datos basada en ADO.NET y numerosos proveedores disponibles para conectarse a SQL Server, Oracle, MySQL, SQLite, PostgreSQL, DB2, etc.\\
-	\newpage
-\subsection {Pruebas Unitarias}
-\item Una prueba unitaria se utiliza para comprobar que un método concreto del código de producción funciona correctamente, probar las regresiones o realizar pruebas relacionadas (buddy) o de humo. Una prueba por orden se utiliza para ejecutar otras pruebas en un orden especificado. 
+	\par Entity Framework es un marco de ORM de código abierto para aplicaciones .NET admitidas por Microsoft. Permite a los desarrolladores trabajar con datos utilizando objetos de clases específicas del dominio sin centrarse en las tablas y columnas de la base de datos subyacente donde se almacenan estos datos. Con el Entity Framework, los desarrolladores pueden trabajar en un nivel más alto de abstracción cuando tratan con datos, y pueden crear y mantener aplicaciones orientadas a datos con menos código en comparación con las aplicaciones tradicionales.[2]\\
+\\Su arquitectura:
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=9cm]{./Imagenes/ef-architecture}
+\end{center}
+\end{figure}
+
+\subsection{ Consultas LINQ}
+	\par Permite consultar cualquier objeto  enumerable en ADO.NET mediante el uso del modelo de programación de Language-Integrated Query (LINQ) [1] para recuperar datos de la base de datos subyacente. El proveedor de la base de datos traducirá estas consultas LINQ al lenguaje de consulta específico de la base de datos (por ejemplo, SQL para una base de datos relacional).\\
+Hay 3 tecnologias ADO.NET LINQ distintas:
+\begin{itemize}
+	\item LINQ to DataSet: proporciona una capacidad de consulta mas rica y optimizada sobre DataSet.
+	\item LINQ to SQL: permite consultar directamente los esquemas de las base de datos de SQL Server.
+	\item LINQ to Entities: permite consultar Entity Data Model.
 \end{itemize}
+
+\subsection{Pruebas Unitarias}
+	\par Las pruebas unitarias son la mejor forma de probaar el codigo de una aplicación a lo largo de su desarrollo. Estas pruebas permiten asegurar que losmétodos devuelven resultados correctos, teniendo en cuenta los argumentos que se le pasan y, además, se pueden utilizar para hacer Test Driven Development. Se trata de una técnica en la que se escriben antes que las clases y los métodos.[4]\\
+ No obstante, tras realizar la integración con otros módulos deberá revisarse de nuevo la interfaz.
