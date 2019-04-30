@@ -1,0 +1,11 @@
+\babel@toc {spanish}{}
+\contentsline {section}{\numberline {1}Actividad No 01 \IeC {\textendash } Revisi\'on de Sintaxis}{1}
+\contentsline {section}{\numberline {2}Actividad No 02 \IeC {\textendash } Reconociendo la estructura}{2}
+\contentsline {section}{\numberline {3}Actividad No 03 \IeC {\textendash } Consultas B\'asicas}{4}
+\contentsline {section}{\numberline {4}Actividad No 04 \IeC {\textendash } Restricci\'on y Ordenamiento}{6}
+\contentsline {section}{\numberline {5}Actividad No 05 \IeC {\textendash } Funciones}{14}
+\contentsline {section}{\numberline {6}Actividad No 06 \IeC {\textendash } Funciones de Conversi\'on}{18}
+\contentsline {section}{\numberline {7}Actividad No 07 \IeC {\textendash } Funciones de Agrupaci\'on}{23}
+\contentsline {section}{\numberline {8}Actividad No 08 \IeC {\textendash } Enlaces}{26}
+\contentsline {section}{\numberline {9}Actividad No 09 \IeC {\textendash } SubConsultas}{30}
+\contentsline {section}{\numberline {10}Actividad No 10 \IeC {\textendash } Conjuntos}{35}
