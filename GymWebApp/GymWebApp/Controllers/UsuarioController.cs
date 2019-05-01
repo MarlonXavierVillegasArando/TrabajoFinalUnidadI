@@ -24,24 +24,98 @@ namespace GymWebApp.Controllers
         }
 
         // GET api/<controller>/5
-        public string Get(int id)
+        [ResponseType(typeof(Usuario))]
+        public IHttpActionResult PostPlan(Usuario usuario)
         {
-            return "value";
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            db.Usuario.Add(usuario);
+            db.SaveChanges();
+
+            return CreatedAtRoute("DefaultApi", new { id = usuario. IdUsuario}, usuario);
         }
 
         // POST api/<controller>
-        public void Post([FromBody]string value)
+        [ResponseType(typeof(Usuario))]
+        public IHttpActionResult PosUsuarion(Usuario Usuario)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            db.Usuario.Add(Usuario);
+            db.SaveChanges();
+
+            return CreatedAtRoute("DefaultApi", new { id = Usuario.IdUsuario }, Usuario);
         }
 
         // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
+        [ResponseType(typeof(void))]
+        public IHttpActionResult PutUsuario(int Id, Usuario usuario)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (Id != usuario.IdUsuario)
+            {
+                return BadRequest();
+            }
+
+            db.Entry(usuario).State = EntityState.Modified;
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!UsuarioExists(Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
         // DELETE api/<controller>/5
-        public void Delete(int id)
+        [ResponseType(typeof(Usuario))]
+        public IHttpActionResult DeleteUsuario(int id)
         {
+            Usuario usuario = db.Usuario.Find(id);
+            if (usuario == null)
+            {
+                return NotFound();
+            }
+
+            db.Usuario.Remove(usuario);
+            db.SaveChanges();
+
+            return Ok(usuario);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        private bool UsuarioExists(int Id)
+        {
+            return db.Usuario.Count(e => e.IdUsuario== Id) > 0;
         }
     }
 }

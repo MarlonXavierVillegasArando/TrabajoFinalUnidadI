@@ -10,8 +10,8 @@ namespace GymWebApp.Models
     public class Entrenador
     {
 
-        [Key, Column(Order = 1), ForeignKey("Empresa")]
-        public int IdEmpresa { get; set; }
+       
+        public int Id{ get; set; }
 
         public string Nombre { get; set; }
         public string Apellido { get; set; }
@@ -20,7 +20,7 @@ namespace GymWebApp.Models
         public DateTime FechaNacimiento { get; set; }
         public string CodSucursal { get; set; }
         public string Estado { get; set; }
-        public  virtual Empresa Empresa { get; set; }
+        
     
 
     }

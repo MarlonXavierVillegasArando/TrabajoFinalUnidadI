@@ -22,24 +22,98 @@ namespace GymWebApp.Controllers
         }
 
         // GET api/<controller>/5
-        public string Get(int id)
+        [ResponseType(typeof(Entrenador))]
+        public IHttpActionResult PostEntrenador(Entrenador entrenador)
         {
-            return "value";
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            db.Entrenador.Add(entrenador);
+            db.SaveChanges();
+
+            return CreatedAtRoute("DefaultApi", new { id =entrenador.Id }, entrenador);
         }
 
         // POST api/<controller>
-        public void Post([FromBody]string value)
+        [ResponseType(typeof(Entrenador))]
+        public IHttpActionResult PostEntrenadorr(Entrenador entrenador)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            db.Entrenador.Add(entrenador);
+            db.SaveChanges();
+
+            return CreatedAtRoute("DefaultApi", new { id = entrenador.Id }, entrenador);
         }
 
         // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
+        [ResponseType(typeof(void))]
+        public IHttpActionResult PutEntrenador(int Id, Entrenador entrenador)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (Id != entrenador.Id)
+            {
+                return BadRequest();
+            }
+
+            db.Entry(entrenador).State = EntityState.Modified;
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!PlanExists(Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
         // DELETE api/<controller>/5
-        public void Delete(int id)
+        [ResponseType(typeof(Entrenador))]
+        public IHttpActionResult DeletEntrenador(int id)
         {
+            Entrenador entrenador = db.Entrenador.Find(id);
+            if (entrenador == null)
+            {
+                return NotFound();
+            }
+
+            db.Entrenador.Remove(entrenador);
+            db.SaveChanges();
+
+            return Ok(entrenador);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        private bool PlanExists(int Id)
+        {
+            return db.Entrenador.Count(e => e.Id == Id) > 0;
         }
     }
 }

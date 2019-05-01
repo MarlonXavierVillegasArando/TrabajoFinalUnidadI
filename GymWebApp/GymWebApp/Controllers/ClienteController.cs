@@ -23,24 +23,93 @@ namespace GymWebApp.Controllers
         }
 
         // GET api/<controller>/5
-        public string Get(int id)
+        [ResponseType(typeof(Cliente))]
+        public IHttpActionResult GetCliente(int Dni)
         {
-            return "value";
+            Cliente cliente = db.Cliente.Find(Dni);
+            if (cliente == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(cliente);
         }
 
         // POST api/<controller>
-        public void Post([FromBody]string value)
+        [ResponseType(typeof(Cliente))]
+        public IHttpActionResult PostCliente(Cliente cliente)
         {
-        }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
+            db.Cliente.Add(cliente);
+            db.SaveChanges();
+
+            return CreatedAtRoute("DefaultApi", new { id = cliente.Dni }, cliente);
+        }
+        // PUT: api/Tareas/5
+        [ResponseType(typeof(void))]
+        public IHttpActionResult PutCliente (int Dni, Cliente cliente)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (Dni != cliente.Dni)
+            {
+                return BadRequest();
+            }
+
+            db.Entry(cliente).State = EntityState.Modified;
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!TareaExists(Dni))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
         // DELETE api/<controller>/5
-        public void Delete(int id)
+        [ResponseType(typeof(Cliente))]
+        public IHttpActionResult DeleteCliente(int id)
         {
+            Cliente cliente = db.Cliente.Find(id);
+            if (cliente == null)
+            {
+                return NotFound();
+            }
+
+            db.Cliente.Remove(cliente);
+            db.SaveChanges();
+
+            return Ok(cliente);
+        }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        private bool TareaExists(int Dni)
+        {
+            return db.Cliente.Count(e => e.Dni == Dni) > 0;
         }
     }
 }

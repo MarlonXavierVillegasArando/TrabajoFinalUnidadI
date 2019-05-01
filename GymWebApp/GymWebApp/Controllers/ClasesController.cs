@@ -22,24 +22,98 @@ namespace GymWebApp.Controllers
         }
 
         // GET api/clases/5
-        public string Get(int id)
+        [ResponseType(typeof(Plan))]
+        public IHttpActionResult PostClases(Clases clases)
         {
-            return "value";
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            db.Clases.Add(clases);
+            db.SaveChanges();
+
+            return CreatedAtRoute("DefaultApi", new { id = clases.Id }, clases);
         }
 
-        // POST api/clases
-        public void Post([FromBody]string value)
+        // POST api/<controller>
+        [ResponseType(typeof(Plan))]
+        public IHttpActionResult PosClases(Clases clases)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            db.Clases.Add(clases);
+            db.SaveChanges();
+
+            return CreatedAtRoute("DefaultApi", new { id = clases.Id }, clases);
         }
 
-        // PUT api/clases/5
-        public void Put(int id, [FromBody]string value)
+        // PUT api/<controller>/5
+        [ResponseType(typeof(void))]
+        public IHttpActionResult PutClases(int Id, Clases clases)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (Id != clases.Id)
+            {
+                return BadRequest();
+            }
+
+            db.Entry(clases).State = EntityState.Modified;
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ClasesExists(Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // DELETE api/clases/5
-        public void Delete(int id)
+        // DELETE api/<controller>/5
+        [ResponseType(typeof(Clases))]
+        public IHttpActionResult DeleteClases(int id)
         {
+            Clases clases = db.Clases.Find(id);
+            if (clases == null)
+            {
+                return NotFound();
+            }
+
+            db.Clases.Remove(clases);
+            db.SaveChanges();
+
+            return Ok(clases);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        private bool ClasesExists(int Id)
+        {
+            return db.Clases.Count(e => e.Id == Id) > 0;
         }
     }
 }

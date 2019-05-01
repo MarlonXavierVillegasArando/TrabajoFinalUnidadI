@@ -22,24 +22,98 @@ namespace GymWebApp.Controllers
         }
 
         // GET api/<controller>/5
-        public string Get(int id)
+        [ResponseType(typeof(Empresa))]
+        public IHttpActionResult PostEmpresa(Empresa empresa)
         {
-            return "value";
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            db.Empresa.Add(empresa);
+            db.SaveChanges();
+
+            return CreatedAtRoute("DefaultApi", new { id = empresa.IdEmpresa }, empresa);
         }
 
         // POST api/<controller>
-        public void Post([FromBody]string value)
+        [ResponseType(typeof(Empresa))]
+        public IHttpActionResult PostEmpresas(Empresa empresa)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            db.Empresa.Add(empresa);
+            db.SaveChanges();
+
+            return CreatedAtRoute("DefaultApi", new { id = empresa.IdEmpresa }, empresa);
         }
 
         // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
+        [ResponseType(typeof(void))]
+        public IHttpActionResult PutEmpresa(int Id, Empresa empresa)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (Id != empresa.IdEmpresa)
+            {
+                return BadRequest();
+            }
+
+            db.Entry(empresa).State = EntityState.Modified;
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!EmpresaExists(Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
         // DELETE api/<controller>/5
-        public void Delete(int id)
+        [ResponseType(typeof(Entrenador))]
+        public IHttpActionResult DeletEmpresa(int id)
         {
+            Empresa empresa = db.Empresa.Find(id);
+            if (empresa == null)
+            {
+                return NotFound();
+            }
+
+            db.Empresa.Remove(empresa);
+            db.SaveChanges();
+
+            return Ok(empresa);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        private bool EmpresaExists(int Id)
+        {
+            return db.Empresa.Count(e => e.IdEmpresa == Id) > 0;
         }
     }
 }

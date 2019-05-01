@@ -9,8 +9,8 @@ namespace GymWebApp.Models
 {
     public class Clases
     {
-        [Key, Column(Order = 1), ForeignKey("Entrenador")]
-        public int IdEntrenador { get; set; }
+       
+        public int Id{ get; set; }
         public string NombreClase { get; set; }
         public string Entrenador { get; set; }
         public string Sucursal { get; set; }

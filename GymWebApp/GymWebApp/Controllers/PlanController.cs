@@ -23,24 +23,98 @@ namespace GymWebApp.Controllers
         }
 
         // GET api/<controller>/5
-        public string Get(int id)
+        [ResponseType(typeof(Plan))]
+        public IHttpActionResult PostPlan(Plan plan)
         {
-            return "value";
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            db.Plan.Add(plan);
+            db.SaveChanges();
+
+            return CreatedAtRoute("DefaultApi", new { id = plan.IdPlan }, plan);
         }
 
         // POST api/<controller>
-        public void Post([FromBody]string value)
+        [ResponseType(typeof(Plan))]
+        public IHttpActionResult Posplan(Plan plan )
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            db.Plan.Add(plan);
+            db.SaveChanges();
+
+            return CreatedAtRoute("DefaultApi", new { id = plan.IdPlan }, plan);
         }
 
         // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
+        [ResponseType(typeof(void))]
+        public IHttpActionResult PutPlan(int IdPlan, Plan plan)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (IdPlan != plan.IdPlan)
+            {
+                return BadRequest();
+            }
+
+            db.Entry(plan).State = EntityState.Modified;
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!PlanExists(IdPlan))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
         // DELETE api/<controller>/5
-        public void Delete(int id)
+        [ResponseType(typeof(Plan))]
+        public IHttpActionResult DeletePlan(int id)
         {
+            Plan plan = db.Plan.Find(id);
+            if (plan == null)
+            {
+                return NotFound();
+            }
+
+            db.Plan.Remove(plan);
+            db.SaveChanges();
+
+            return Ok(plan);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        private bool PlanExists(int Idplan)
+        {
+            return db.Plan.Count(e => e.IdPlan == Idplan) > 0;
         }
     }
 }
