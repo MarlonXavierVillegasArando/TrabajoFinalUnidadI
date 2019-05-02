@@ -21,24 +21,11 @@ namespace GymWebApp.Controllers
             return db.Entrenador;
         }
 
-        // GET api/<controller>/5
+   
+
+        // POST api/Entrenador
         [ResponseType(typeof(Entrenador))]
         public IHttpActionResult PostEntrenador(Entrenador entrenador)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            db.Entrenador.Add(entrenador);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id =entrenador.Id }, entrenador);
-        }
-
-        // POST api/<controller>
-        [ResponseType(typeof(Entrenador))]
-        public IHttpActionResult PostEntrenadorr(Entrenador entrenador)
         {
             if (!ModelState.IsValid)
             {

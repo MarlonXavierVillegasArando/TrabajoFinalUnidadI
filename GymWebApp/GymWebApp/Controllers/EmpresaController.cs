@@ -20,8 +20,9 @@ namespace GymWebApp.Controllers
         {
             return db.Empresa;
         }
+        
 
-        // GET api/<controller>/5
+        // POST: api/Empresa
         [ResponseType(typeof(Empresa))]
         public IHttpActionResult PostEmpresa(Empresa empresa)
         {
@@ -33,22 +34,7 @@ namespace GymWebApp.Controllers
             db.Empresa.Add(empresa);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = empresa.IdEmpresa }, empresa);
-        }
-
-        // POST api/<controller>
-        [ResponseType(typeof(Empresa))]
-        public IHttpActionResult PostEmpresas(Empresa empresa)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            db.Empresa.Add(empresa);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = empresa.IdEmpresa }, empresa);
+            return CreatedAtRoute("DefaultApi", new { id = empresa.Id }, empresa);
         }
 
         // PUT api/<controller>/5
@@ -60,7 +46,7 @@ namespace GymWebApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (Id != empresa.IdEmpresa)
+            if (Id != empresa.Id)
             {
                 return BadRequest();
             }
@@ -113,7 +99,7 @@ namespace GymWebApp.Controllers
 
         private bool EmpresaExists(int Id)
         {
-            return db.Empresa.Count(e => e.IdEmpresa == Id) > 0;
+            return db.Empresa.Count(e => e.Id == Id) > 0;
         }
     }
 }

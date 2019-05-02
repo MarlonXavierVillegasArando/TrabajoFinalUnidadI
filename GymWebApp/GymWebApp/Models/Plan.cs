@@ -7,7 +7,7 @@ namespace GymWebApp.Models
 {
     public class Plan
     {
-        public int IdPlan { get; set; }
+        public int Id { get; set; }
         public string Nombre { get; set; }
         public double Costo { get; set; }
         public int Duracion { get; set; }

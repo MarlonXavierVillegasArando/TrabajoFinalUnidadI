@@ -178,13 +178,18 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ClaseEntrenador.cs" />
     <Compile Include="Models\Clases.cs" />
     <Compile Include="Models\Cliente.cs" />
+    <Compile Include="Models\ClienteEntrenador.cs" />
+    <Compile Include="Models\ClientePlan.cs" />
     <Compile Include="Models\Empresa.cs" />
+    <Compile Include="Models\EmpresaEntrenador.cs" />
     <Compile Include="Models\Entrenador.cs" />
     <Compile Include="Models\GymWebAppContext.cs" />
     <Compile Include="Models\Plan.cs" />
     <Compile Include="Models\Usuario.cs" />
+    <Compile Include="Models\UsuarioEmpresa.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -288,7 +293,9 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>52846</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:52846/</IISUrl>
+          <IISUrl>http://localhost:52844/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://localhost:52844/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

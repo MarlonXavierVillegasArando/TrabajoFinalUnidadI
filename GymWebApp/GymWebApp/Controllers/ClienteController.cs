@@ -34,8 +34,7 @@ namespace GymWebApp.Controllers
 
             return Ok(cliente);
         }
-
-        // POST api/<controller>
+        // POST: api/Cliente
         [ResponseType(typeof(Cliente))]
         public IHttpActionResult PostCliente(Cliente cliente)
         {
@@ -47,18 +46,18 @@ namespace GymWebApp.Controllers
             db.Cliente.Add(cliente);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = cliente.Dni }, cliente);
+            return CreatedAtRoute("DefaultApi", new { id = cliente.Id }, cliente);
         }
         // PUT: api/Tareas/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutCliente (int Dni, Cliente cliente)
+        public IHttpActionResult PutCliente (int Id, Cliente cliente)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (Dni != cliente.Dni)
+            if (Id != cliente.Id)
             {
                 return BadRequest();
             }
@@ -71,7 +70,7 @@ namespace GymWebApp.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TareaExists(Dni))
+                if (!TareaExists(Id))
                 {
                     return NotFound();
                 }
@@ -107,9 +106,9 @@ namespace GymWebApp.Controllers
             base.Dispose(disposing);
         }
 
-        private bool TareaExists(int Dni)
+        private bool TareaExists(int Id)
         {
-            return db.Cliente.Count(e => e.Dni == Dni) > 0;
+            return db.Cliente.Count(e => e.Id == Id) > 0;
         }
     }
 }

@@ -22,9 +22,10 @@ namespace GymWebApp.Controllers
             return db.Plan;
         }
 
-        // GET api/<controller>/5
+
+        // POST api/Plan
         [ResponseType(typeof(Plan))]
-        public IHttpActionResult PostPlan(Plan plan)
+        public IHttpActionResult PostPlan(Plan plan )
         {
             if (!ModelState.IsValid)
             {
@@ -34,22 +35,7 @@ namespace GymWebApp.Controllers
             db.Plan.Add(plan);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = plan.IdPlan }, plan);
-        }
-
-        // POST api/<controller>
-        [ResponseType(typeof(Plan))]
-        public IHttpActionResult Posplan(Plan plan )
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            db.Plan.Add(plan);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = plan.IdPlan }, plan);
+            return CreatedAtRoute("DefaultApi", new { id = plan.Id }, plan);
         }
 
         // PUT api/<controller>/5
@@ -61,7 +47,7 @@ namespace GymWebApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (IdPlan != plan.IdPlan)
+            if (IdPlan != plan.Id)
             {
                 return BadRequest();
             }
@@ -114,7 +100,7 @@ namespace GymWebApp.Controllers
 
         private bool PlanExists(int Idplan)
         {
-            return db.Plan.Count(e => e.IdPlan == Idplan) > 0;
+            return db.Plan.Count(e => e.Id == Idplan) > 0;
         }
     }
 }

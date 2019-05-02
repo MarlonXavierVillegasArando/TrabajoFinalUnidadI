@@ -15,30 +15,16 @@ namespace GymWebApp.Controllers
     public class ClasesController : ApiController
     {
         private GymWebAppContext db = new GymWebAppContext();
-        // GET: api/clases
+        // GET: api/Clases
         public IQueryable<Clases> GetClases()
         {
             return db.Clases;
         }
 
-        // GET api/clases/5
-        [ResponseType(typeof(Plan))]
+
+        // POST: api/Clases
+        [ResponseType(typeof(Clases))]
         public IHttpActionResult PostClases(Clases clases)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            db.Clases.Add(clases);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = clases.Id }, clases);
-        }
-
-        // POST api/<controller>
-        [ResponseType(typeof(Plan))]
-        public IHttpActionResult PosClases(Clases clases)
         {
             if (!ModelState.IsValid)
             {

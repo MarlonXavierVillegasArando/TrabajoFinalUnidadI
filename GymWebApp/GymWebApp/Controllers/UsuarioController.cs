@@ -23,24 +23,11 @@ namespace GymWebApp.Controllers
             return db.Usuario;
         }
 
-        // GET api/<controller>/5
+      
+
+        // POST api/Usuario
         [ResponseType(typeof(Usuario))]
-        public IHttpActionResult PostPlan(Usuario usuario)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            db.Usuario.Add(usuario);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = usuario. IdUsuario}, usuario);
-        }
-
-        // POST api/<controller>
-        [ResponseType(typeof(Usuario))]
-        public IHttpActionResult PosUsuarion(Usuario Usuario)
+        public IHttpActionResult PostUsuario(Usuario Usuario)
         {
             if (!ModelState.IsValid)
             {
@@ -50,7 +37,7 @@ namespace GymWebApp.Controllers
             db.Usuario.Add(Usuario);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = Usuario.IdUsuario }, Usuario);
+            return CreatedAtRoute("DefaultApi", new { id = Usuario.Id }, Usuario);
         }
 
         // PUT api/<controller>/5
@@ -62,7 +49,7 @@ namespace GymWebApp.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (Id != usuario.IdUsuario)
+            if (Id != usuario.Id)
             {
                 return BadRequest();
             }
@@ -115,7 +102,7 @@ namespace GymWebApp.Controllers
 
         private bool UsuarioExists(int Id)
         {
-            return db.Usuario.Count(e => e.IdUsuario== Id) > 0;
+            return db.Usuario.Count(e => e.Id== Id) > 0;
         }
     }
 }
