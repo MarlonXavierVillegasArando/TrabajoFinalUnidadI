@@ -5,7 +5,6 @@ F:\dbii\TrabajoFinalUnidadI\GymWebApp\SistemaGymDominio\bin\Debug\EntityFramewor
 F:\dbii\TrabajoFinalUnidadI\GymWebApp\SistemaGymDominio\bin\Debug\EntityFramework.SqlServer.dll
 F:\dbii\TrabajoFinalUnidadI\GymWebApp\SistemaGymDominio\bin\Debug\EntityFramework.xml
 F:\dbii\TrabajoFinalUnidadI\GymWebApp\SistemaGymDominio\bin\Debug\EntityFramework.SqlServer.xml
-F:\dbii\TrabajoFinalUnidadI\GymWebApp\SistemaGymDominio\obj\Debug\SistemaGymDominio.csprojResolveAssemblyReference.cache
 F:\dbii\TrabajoFinalUnidadI\GymWebApp\SistemaGymDominio\obj\Debug\SistemaGymDominio.csproj.CoreCompileInputs.cache
 F:\dbii\TrabajoFinalUnidadI\GymWebApp\SistemaGymDominio\obj\Debug\SistemaGymDominio.csproj.CopyComplete
 F:\dbii\TrabajoFinalUnidadI\GymWebApp\SistemaGymDominio\obj\Debug\SistemaGymDominio.dll
